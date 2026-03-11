@@ -27,6 +27,7 @@ Implement game logic using JavaScript
 
 Create a simple and engaging user interface
 
+
 🛠 Technologies Used
 
 Frontend Technologies:
@@ -37,6 +38,7 @@ CSS3 – Styling and layout design
 
 JavaScript – Game logic and interactivity
 
+
 Tools Used:
 
 Figma – UI/UX design planning
@@ -44,6 +46,7 @@ Figma – UI/UX design planning
 GitHub – Version control and project hosting
 
 Netlify – Website deployment
+
 
 📂 Project Structure
 Final-project-of-HTML-CSS-JS
@@ -63,9 +66,11 @@ css/
 js/
    script.js
 
+
 Documentation/
    Final_Report.pdf
    Presentation.pptx
+
 
 ✨ Features
 
@@ -79,12 +84,14 @@ Organized structure with external CSS and JavaScript files
 
 Clean UI for better user experience
 
+
 🎨 UI Design
 
 The interface of the project was first designed using Figma to plan layout and navigation before implementation.
 
 🔗 Figma Design:
-(Add your Figma link here)
+[](https://www.figma.com/design/oQ81RNztoVnNSiigQNgUWX/Home?node-id=0-1&t=3nYJEMMPK0GLlP2e-1)
+
 
 🚀 How to Run the Project
 
@@ -97,6 +104,7 @@ Run the website by opening:
 index.html
 
 in any web browser.
+
 
 📑 Documentation
 
