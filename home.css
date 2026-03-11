@@ -1,0 +1,128 @@
+/* home.css — Home Page Styles */
+
+#home-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px 20px 60px;
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+}
+
+.home-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 5px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.1s forwards;
+}
+
+.home-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(4.5rem, 12vw, 8rem);
+  font-weight: 900;
+  line-height: 1;
+  color: var(--text);
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.2s forwards;
+}
+
+.home-title span {
+  color: var(--gold);
+  display: block;
+}
+
+.home-desc {
+  font-size: 1.4rem;
+  color: var(--muted);
+  max-width: 500px;
+  line-height: 1.7;
+  margin-bottom: 50px;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.3s forwards;
+}
+
+.home-stats {
+  display: flex;
+  gap: 60px;
+  margin-bottom: 60px;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.4s forwards;
+}
+
+.stat { text-align: center; }
+
+.stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 4.5rem;
+  font-weight: 700;
+  color: var(--gold);
+  display: block;
+}
+
+.stat-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.home-cta {
+  opacity: 0;
+  animation: fadeUp 0.6s 0.5s forwards;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.home-features {
+  display: flex;
+  gap: 24px;
+  margin-top: 80px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 900px;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.7s forwards;
+}
+
+.feature-pill {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  padding: 12px 24px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s;
+}
+
+.feature-pill:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: var(--gold-glow);
+  transform: translateY(-2px);
+}
+
+.feature-pill .pill-icon { font-size: 1rem; }
+
+@media (max-width: 600px) {
+  .home-stats { gap: 30px; }
+  .home-desc { font-size: 1.1rem; }
+  .stat-num { font-size: 3rem; }
+}

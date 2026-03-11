@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forum — ENIGMA Riddle Challenge</title>
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/forum.css" />
+</head>
+<body>
+
+  <div class="animated-bg-container">
+    <div class="float-orb orb-1"></div>
+    <div class="float-orb orb-2"></div>
+    <div class="float-orb orb-3"></div>
+    <div class="float-orb orb-4"></div>
+    <div class="float-orb orb-5"></div>
+  </div>
+
+  <nav>
+    <a href="home.html" class="nav-logo">🎭 ENIGMA</a>
+    <ul class="nav-links">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="play.html">Play</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="leaderboard.html">Leaderboard</a></li>
+      <li><a href="forum.html" class="active">Forum</a></li>
+    </ul>
+  </nav>
+
+  <main class="forum-page">
+    <div class="forum-container">
+
+      <div class="section-header">
+        <p class="section-eyebrow">Community</p>
+        <h2 class="section-title">Discussion</h2>
+      </div>
+
+      <!-- Stats Bar -->
+      <div class="forum-stats" id="forumStats">
+        <div class="forum-stat">
+          <span class="forum-stat-val" id="totalPosts">0</span>
+          <span class="forum-stat-label">Posts</span>
+        </div>
+        <div class="forum-stat">
+          <span class="forum-stat-val" id="totalAuthors">0</span>
+          <span class="forum-stat-label">Members</span>
+        </div>
+        <div class="forum-stat">
+          <span class="forum-stat-val" id="totalRiddles">30</span>
+          <span class="forum-stat-label">Riddles</span>
+        </div>
+      </div>
+
+      <!-- Post Comment -->
+      <div class="forum-input-card">
+        <div class="forum-input-title">Share Your Thoughts</div>
+        <div class="forum-row">
+          <input type="text" class="forum-name-input" id="forumName" placeholder="Your name" maxlength="20" />
+          <select class="forum-riddle-select" id="forumRiddle">
+            <option value="">— Select a riddle —</option>
+          </select>
+        </div>
+        <textarea class="forum-textarea" id="forumComment"
+          placeholder="Share your interpretation, alternative answer, or ask for help..."></textarea>
+        <button class="forum-submit" onclick="postComment()">Post Comment</button>
+      </div>
+
+      <!-- Comments List -->
+      <div class="forum-comments" id="forumComments"></div>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <p>© 2026 ENIGMA Riddle Challenge Portal. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/script.js"></script>
+  <script>
+    function updateForumStats() {
+      const comments = JSON.parse(localStorage.getItem('enigma_forum') || '[]');
+      const uniqueAuthors = new Set(comments.map(c => c.name)).size;
+      document.getElementById('totalPosts').textContent = comments.length;
+      document.getElementById('totalAuthors').textContent = uniqueAuthors;
+    }
+
+    // Wrap postComment to also update stats after posting
+    document.addEventListener('DOMContentLoaded', () => {
+      populateForumRiddles();
+      renderComments();
+      updateForumStats();
+
+      const _origPost = window.postComment;
+      window.postComment = function() {
+        _origPost();
+        updateForumStats();
+      };
+    });
+  </script>
+</body>
+</html>

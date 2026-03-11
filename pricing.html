@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pricing — ENIGMA Riddle Challenge</title>
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/pricing.css" />
+</head>
+<body>
+
+  <div class="animated-bg-container">
+    <div class="float-orb orb-1"></div>
+    <div class="float-orb orb-2"></div>
+    <div class="float-orb orb-3"></div>
+    <div class="float-orb orb-4"></div>
+    <div class="float-orb orb-5"></div>
+  </div>
+
+  <nav>
+    <a href="home.html" class="nav-logo">🎭 ENIGMA</a>
+    <ul class="nav-links">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="play.html">Play</a></li>
+      <li><a href="pricing.html" class="active">Pricing</a></li>
+      <li><a href="leaderboard.html">Leaderboard</a></li>
+      <li><a href="forum.html">Forum</a></li>
+    </ul>
+  </nav>
+
+  <main class="pricing-page">
+
+    <div class="section-header">
+      <p class="section-eyebrow">Choose Your Plan</p>
+      <h2 class="section-title">Pricing &amp; Plans</h2>
+      <p style="color:var(--muted);margin-top:12px;font-size:1rem;">
+        Start free or upgrade for unlimited access to advanced riddles
+      </p>
+    </div>
+
+    <div class="pricing-toggle">
+      <button class="toggle-btn active" onclick="toggleBilling('monthly')" id="monthlyToggle">Monthly</button>
+      <button class="toggle-btn" onclick="toggleBilling('yearly')" id="yearlyToggle">
+        Yearly <span class="save-badge">Save 25%</span>
+      </button>
+    </div>
+
+    <div class="pricing-cards">
+
+      <!-- Starter -->
+      <div class="pricing-card free-plan">
+        <div class="plan-header">
+          <h3 class="plan-name">Starter</h3>
+          <p class="plan-desc">Perfect for trying us out</p>
+        </div>
+        <div class="plan-price">
+          <span class="price">Free</span>
+          <span class="period">Forever</span>
+        </div>
+        <button class="btn-plan active">Your Plan</button>
+        <div class="features-list">
+          <div class="feature"><span class="feature-icon">✓</span><span>10 riddles per game</span></div>
+          <div class="feature"><span class="feature-icon">✓</span><span>3 difficulty levels</span></div>
+          <div class="feature"><span class="feature-icon">✓</span><span>Leaderboard access</span></div>
+          <div class="feature"><span class="feature-icon">✓</span><span>Forum discussions</span></div>
+          <div class="feature disabled"><span class="feature-icon">✗</span><span>Advanced riddle sets</span></div>
+          <div class="feature disabled"><span class="feature-icon">✗</span><span>Daily challenges</span></div>
+          <div class="feature disabled"><span class="feature-icon">✗</span><span>Unlimited hint usage</span></div>
+          <div class="feature disabled"><span class="feature-icon">✗</span><span>Priority support</span></div>
+        </div>
+      </div>
+
+      <!-- Pro -->
+      <div class="pricing-card pro-plan featured">
+        <div class="badge-featured">MOST POPULAR</div>
+        <div class="plan-header">
+          <h3 class="plan-name">Pro</h3>
+          <p class="plan-desc">For serious puzzlers</p>
+        </div>
+        <div class="plan-price">
+          <span class="price" id="proPriceMonthly">₹99</span>
+          <span class="period" id="properiodMonthly">/month</span>
+          <span class="price" id="proPriceYearly" style="display:none;">₹999</span>
+          <span class="period" id="properiodYearly" style="display:none;">/year</span>
+        </div>
+        <button class="btn-plan" onclick="selectPlan('pro')">Upgrade to Pro</button>
+        <div class="features-list">
+          <div class="feature"><span class="feature-icon">✓</span><span>Everything in Starter</span></div>
+          <div class="feature"><span class="feature-icon">✓</span><span>50+ advanced riddles</span></div>
+          <div class="feature"><span class="feature-icon">✓</span><span>Daily challenges</span></div>
+          <div class="feature"><span class="feature-icon">✓</span><span>Unlimited hints</span></div>
+          <div class="feature"><span class="feature-icon">✓</span><span>Custom difficulty modes</span></div>
+          <div class="feature"><span class="feature-icon">✓</span><span>Advanced analytics</span></div>
+          <div class="feature disabled"><span class="feature-icon">✗</span><span>Elite riddle collection</span></div>
+          <div class="feature disabled"><span class="feature-icon">✗</span><span>Priority support</span></div>
+        </div>
+      </div>
+
+      <!-- Elite -->
+      <div class="pricing-card elite-plan">
+        <div class="plan-header">
+          <h3 class="plan-name">Elite</h3>
+          <p class="plan-desc">Maximum experience</p>
+        </div>
+        <div class="plan-price">
+          <span class="price" id="elitePriceMonthly">₹999</span>
+          <span class="period" id="eliteperiodMonthly">/month</span>
+          <span class="price" id="elitePriceYearly" style="display:none;">₹1999</span>
+          <span class="period" id="eliteperiodYearly" style="display:none;">/year</span>
+        </div>
+        <button class="btn-plan" onclick="selectPlan('elite')">Upgrade to Elite</button>
+        <div class="features-list">
+          <div class="feature"><span class="feature-icon">✓</span><span>Everything in Pro</span></div>
+          <div class="feature"><span class="feature-icon">✓</span><span>100+ elite riddles</span></div>
+          <div class="feature"><span class="feature-icon">✓</span><span>Weekly tournaments</span></div>
+          <div class="feature"><span class="feature-icon">✓</span><span>Custom riddle creation</span></div>
+          <div class="feature"><span class="feature-icon">✓</span><span>Multiplayer mode</span></div>
+          <div class="feature"><span class="feature-icon">✓</span><span>Extended time modes</span></div>
+          <div class="feature"><span class="feature-icon">✓</span><span>24/7 priority support</span></div>
+          <div class="feature"><span class="feature-icon">✓</span><span>Exclusive badges &amp; titles</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- FAQ -->
+    <div class="pricing-faq">
+      <h3 class="faq-title">Frequently Asked Questions</h3>
+      <div class="faq-grid" id="faqAccordion">
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            Can I upgrade or downgrade anytime?
+            <i class="faq-question-icon">+</i>
+          </div>
+          <div class="faq-answer"><div class="faq-answer-inner">Yes! Change your plan at any time. Your billing will adjust proportionally — you'll only be charged for what you use.</div></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            Is there a free trial?
+            <i class="faq-question-icon">+</i>
+          </div>
+          <div class="faq-answer"><div class="faq-answer-inner">Try Pro free for 7 days! No credit card required to start — just sign up and dive into the full experience.</div></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            What payment methods do you accept?
+            <i class="faq-question-icon">+</i>
+          </div>
+          <div class="faq-answer"><div class="faq-answer-inner">We accept all major credit cards, PayPal, and UPI. All transactions are secured with 256-bit SSL encryption.</div></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            Can I cancel anytime?
+            <i class="faq-question-icon">+</i>
+          </div>
+          <div class="faq-answer"><div class="faq-answer-inner">Absolutely. Cancel your subscription anytime with zero cancellation fees. Your access continues until the end of the billing period.</div></div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <p>© 2026 ENIGMA Riddle Challenge Portal. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/script.js"></script>
+</body>
+</html>

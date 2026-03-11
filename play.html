@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Play — ENIGMA Riddle Challenge</title>
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/play.css" />
+
+</head>
+<body>
+
+  <div class="animated-bg-container">
+    <div class="float-orb orb-1"></div>
+    <div class="float-orb orb-2"></div>
+    <div class="float-orb orb-3"></div>
+    <div class="float-orb orb-4"></div>
+    <div class="float-orb orb-5"></div>
+  </div>
+
+  <nav>
+    <a href="home.html" class="nav-logo">🎭 ENIGMA</a>
+    <ul class="nav-links">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="play.html" class="active">Play</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="leaderboard.html">Leaderboard</a></li>
+      <li><a href="forum.html">Forum</a></li>
+    </ul>
+  </nav>
+
+  <!-- ─── PLAY SECTION ─── -->
+  <main id="play-section" class="play-page">
+    <div class="play-container">
+
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width:0%"></div>
+      </div>
+
+      <div class="play-header">
+        <div class="score-display">
+          <div class="score-item">
+            <span class="score-val" id="scoreVal">0</span>
+            <span class="score-key">Score</span>
+          </div>
+          <div class="score-item">
+            <span class="score-val" id="correctCount">0</span>
+            <span class="score-key">Correct</span>
+          </div>
+          <div class="score-item">
+            <span class="score-val" id="questionNum">1/10</span>
+            <span class="score-key">Question</span>
+          </div>
+        </div>
+        <div class="timer-display">
+          <div class="timer-ring">
+            <svg width="70" height="70" viewBox="0 0 70 70">
+              <circle class="bg" cx="35" cy="35" r="30" />
+              <circle class="progress" cx="35" cy="35" r="30" id="timerCircle" />
+            </svg>
+            <div class="timer-num" id="timerNum">30</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="riddle-card" id="riddleCard">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div class="riddle-num" id="riddleNum">Riddle 01</div>
+          <span class="difficulty-badge easy" id="diffBadge">Easy</span>
+        </div>
+        <p class="riddle-text" id="riddleText">Loading riddle...</p>
+        <div class="hint-area" id="hintArea">
+          <div class="hint-label">Hint</div>
+          <div class="hint-text" id="hintText"></div>
+        </div>
+      </div>
+
+      <div class="answer-area">
+        <input type="text" class="answer-input" id="answerInput"
+               placeholder="Type your answer..." autocomplete="off" />
+        <button class="btn-submit" onclick="checkAnswer()">Submit</button>
+      </div>
+
+      <div class="action-row">
+        <div>
+          <button class="btn-ghost" onclick="revealHint()" id="hintBtn">💡 Show Hint</button>
+          <span class="hint-cost" id="hintCostMsg" style="margin-left:10px;">−<span>10pts</span></span>
+        </div>
+        <button class="btn-ghost" onclick="skipQuestion()">Skip →</button>
+      </div>
+
+      <div class="feedback-msg" id="feedbackMsg"></div>
+    </div>
+  </main>
+
+  <!-- ─── RESULTS SECTION (hidden until game ends) ─── -->
+  <section id="results-section">
+    <div class="results-icon" id="resultsIcon">🏆</div>
+    <h2 class="results-title" id="resultsTitle">Brilliant!</h2>
+    <p class="results-subtitle" id="resultsSubtitle">Challenge Complete</p>
+
+    <div class="results-stats">
+      <div class="result-stat-card">
+        <span class="result-stat-val" id="finalScore">0</span>
+        <span class="result-stat-label">Total Score</span>
+      </div>
+      <div class="result-stat-card">
+        <span class="result-stat-val" id="finalCorrect">0</span>
+        <span class="result-stat-label">Correct</span>
+      </div>
+      <div class="result-stat-card">
+        <span class="result-stat-val" id="finalAccuracy">0%</span>
+        <span class="result-stat-label">Accuracy</span>
+      </div>
+    </div>
+
+    <div class="name-input-area">
+      <input type="text" class="name-input" id="playerName"
+             placeholder="Enter your name for leaderboard..." maxlength="20" />
+      <button class="btn-primary" onclick="saveScore()" style="opacity:1;animation:none;">Save Score</button>
+    </div>
+
+    <div class="results-actions">
+      <button class="btn-primary" onclick="restartGame()" style="opacity:1;animation:none;">Play Again</button>
+      <a href="leaderboard.html" class="btn-ghost">View Leaderboard</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <p>© 2026 ENIGMA Riddle Challenge Portal. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/script.js"></script>
+  <script>
+    // Auto-start game on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      // Wire up Enter key
+      document.getElementById('answerInput').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') checkAnswer();
+      });
+      // Start the game
+      startGame();
+    });
+
+    // Play Again — reset and show play section
+    function restartGame() {
+      const resultsSec = document.getElementById('results-section');
+      const playSec    = document.getElementById('play-section');
+      if (resultsSec) resultsSec.classList.remove('active');
+      if (playSec)    playSec.style.display = 'block';
+      startGame();
+    }
+  </script>
+</body>
+</html>

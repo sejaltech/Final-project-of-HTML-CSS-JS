@@ -1,0 +1,168 @@
+/* play.css — Play & Results Page Styles */
+
+.play-page {
+  padding: 100px 20px 60px;
+  position: relative;
+  z-index: 1;
+}
+
+.play-container {
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+/* ─── PROGRESS ─── */
+.progress-bar {
+  width: 100%; height: 3px;
+  background: var(--surface2); border-radius: 2px;
+  margin-bottom: 30px;
+}
+.progress-fill {
+  height: 100%; background: var(--gold);
+  border-radius: 2px; transition: width 0.4s;
+}
+
+/* ─── PLAY HEADER ─── */
+.play-header {
+  display: flex; justify-content: space-between;
+  align-items: center; margin-bottom: 30px; padding: 0 4px;
+}
+
+.score-display { display: flex; gap: 30px; }
+.score-item { text-align: center; }
+.score-val {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem; font-weight: 700;
+  color: var(--gold); display: block; line-height: 1;
+}
+.score-key {
+  font-family: 'DM Mono', monospace; font-size: 0.6rem;
+  letter-spacing: 3px; text-transform: uppercase; color: var(--muted);
+}
+
+/* ─── TIMER ─── */
+.timer-display { display: flex; align-items: center; gap: 12px; }
+.timer-ring { width: 70px; height: 70px; position: relative; }
+.timer-ring svg { transform: rotate(-90deg); }
+.timer-ring circle.bg { fill: none; stroke: var(--surface2); stroke-width: 4; }
+.timer-ring circle.progress {
+  fill: none; stroke: var(--gold); stroke-width: 4;
+  stroke-linecap: round; stroke-dasharray: 188; stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1s linear, stroke 0.5s;
+}
+.timer-num {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'DM Mono', monospace; font-size: 1rem;
+  font-weight: 500; color: var(--text);
+}
+
+/* ─── RIDDLE CARD ─── */
+.riddle-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 50px 50px 40px;
+  position: relative; overflow: hidden; margin-bottom: 24px;
+}
+.riddle-card::before {
+  content: '"'; position: absolute; top: -10px; left: 30px;
+  font-family: 'Playfair Display', serif; font-size: 8rem;
+  color: var(--gold); opacity: 0.08; line-height: 1;
+}
+
+.riddle-num {
+  font-family: 'DM Mono', monospace; font-size: 0.65rem;
+  letter-spacing: 4px; color: var(--gold); text-transform: uppercase; margin-bottom: 16px;
+}
+
+.difficulty-badge {
+  display: inline-block; padding: 4px 12px; border-radius: 20px;
+  font-family: 'DM Mono', monospace; font-size: 0.6rem;
+  letter-spacing: 2px; text-transform: uppercase; float: right;
+}
+.difficulty-badge.easy   { background: rgba(46,204,113,.15); color: #2ecc71; border: 1px solid rgba(46,204,113,.3); }
+.difficulty-badge.medium { background: rgba(232,163,7,.15);  color: #f5b041; border: 1px solid rgba(232,163,7,.3); }
+.difficulty-badge.hard   { background: rgba(231,76,60,.15);  color: #e74c3c; border: 1px solid rgba(231,76,60,.3); }
+
+.riddle-text {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+  line-height: 1.6; color: var(--text); clear: both; position: relative; z-index: 1;
+}
+
+.hint-area {
+  margin-top: 20px; padding: 16px 20px;
+  background: rgba(232,163,7,.08);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 6px 6px 0; display: none;
+}
+.hint-area.visible { display: block; }
+.hint-label { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+.hint-text { font-size: 0.9rem; color: var(--muted); font-style: italic; }
+
+/* ─── ANSWER AREA ─── */
+.answer-area { display: flex; gap: 12px; margin-bottom: 16px; }
+.answer-input {
+  flex: 1; background: var(--surface); border: 1px solid var(--border);
+  border-radius: 8px; padding: 16px 20px; color: var(--text);
+  font-family: 'DM Sans', sans-serif; font-size: 1.1rem;
+  outline: none; transition: border-color 0.2s;
+}
+.answer-input:focus { border-color: var(--gold); }
+.answer-input.correct { border-color: var(--green); background: rgba(16,185,129,.05); }
+.answer-input.wrong   { border-color: var(--red); animation: shake 0.3s; }
+
+.btn-submit {
+  background: var(--gold); color: #1a1a2e; border: none;
+  padding: 16px 32px; border-radius: 8px;
+  font-family: 'DM Mono', monospace; font-size: 0.8rem;
+  letter-spacing: 2px; text-transform: uppercase; cursor: pointer;
+  font-weight: 500; transition: all 0.2s; white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(232,163,7,.25);
+}
+.btn-submit:hover { background: var(--gold-light); box-shadow: 0 4px 12px rgba(232,163,7,.4); }
+
+/* ─── ACTION ROW ─── */
+.action-row { display: flex; gap: 12px; justify-content: space-between; align-items: center; }
+.hint-cost { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--muted); letter-spacing: 1px; }
+.hint-cost span { color: var(--red); }
+
+/* ─── FEEDBACK ─── */
+.feedback-msg {
+  padding: 14px 20px; border-radius: 8px;
+  font-family: 'DM Mono', monospace; font-size: 0.8rem;
+  letter-spacing: 1px; display: none; margin-top: 12px;
+}
+.feedback-msg.correct { background: rgba(46,204,113,.15); color: #2ecc71; border: 1px solid rgba(46,204,113,.3); display: block; }
+.feedback-msg.wrong   { background: rgba(231,76,60,.15);  color: #e74c3c; border: 1px solid rgba(231,76,60,.3);  display: block; }
+
+/* ─── RESULTS ─── */
+#results-section {
+  display: none;
+  padding: 100px 20px 60px;
+  flex-direction: column; align-items: center;
+  justify-content: center; text-align: center;
+  min-height: 100vh; position: relative; z-index: 1;
+}
+#results-section.active { display: flex; }
+
+.results-icon { font-size: 4rem; margin-bottom: 20px; opacity: 0; animation: bounceIn 0.5s 0.1s forwards; }
+.results-title { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900; color: var(--gold); margin-bottom: 10px; opacity: 0; animation: fadeUp 0.5s 0.2s forwards; }
+.results-subtitle { font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 50px; opacity: 0; animation: fadeUp 0.5s 0.3s forwards; }
+
+.results-stats { display: grid; grid-template-columns: repeat(3,160px); gap: 16px; margin-bottom: 50px; opacity: 0; animation: fadeUp 0.5s 0.4s forwards; }
+.result-stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 24px 16px; }
+.result-stat-val { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; color: var(--gold); display: block; }
+.result-stat-label { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+
+.name-input-area { display: flex; gap: 12px; margin-bottom: 20px; opacity: 0; animation: fadeUp 0.5s 0.5s forwards; width: 100%; max-width: 400px; }
+.name-input { flex: 1; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px; color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 0.95rem; outline: none; }
+.name-input:focus { border-color: var(--gold); }
+
+.results-actions { display: flex; gap: 12px; opacity: 0; animation: fadeUp 0.5s 0.6s forwards; flex-wrap: wrap; justify-content: center; }
+
+@media (max-width: 600px) {
+  .riddle-card { padding: 30px 24px; }
+  .answer-area { flex-direction: column; }
+  .results-stats { grid-template-columns: repeat(3,1fr); gap: 10px; }
+  .play-page { padding: 100px 16px 60px; }
+}

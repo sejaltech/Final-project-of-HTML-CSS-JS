@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leaderboard — ENIGMA Riddle Challenge</title>
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/leaderboard.css" />
+</head>
+<body>
+
+  <div class="animated-bg-container">
+    <div class="float-orb orb-1"></div>
+    <div class="float-orb orb-2"></div>
+    <div class="float-orb orb-3"></div>
+    <div class="float-orb orb-4"></div>
+    <div class="float-orb orb-5"></div>
+  </div>
+
+  <nav>
+    <a href="home.html" class="nav-logo">🎭 ENIGMA</a>
+    <ul class="nav-links">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="play.html">Play</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="leaderboard.html" class="active">Leaderboard</a></li>
+      <li><a href="forum.html">Forum</a></li>
+    </ul>
+  </nav>
+
+  <main class="leaderboard-page">
+
+    <div class="section-header">
+      <p class="section-eyebrow">Hall of Fame</p>
+      <h2 class="section-title">Leaderboard</h2>
+    </div>
+
+    <!-- Top 3 Podium (rendered by JS) -->
+    <div class="lb-top-three" id="podiumArea"></div>
+
+    <!-- Full Table -->
+    <div class="leaderboard-table">
+      <div class="lb-header">
+        <div class="lb-header-cell">Rank</div>
+        <div class="lb-header-cell">Name</div>
+        <div class="lb-header-cell">Correct</div>
+        <div class="lb-header-cell">Accuracy</div>
+        <div class="lb-header-cell">Score</div>
+      </div>
+      <div id="lbBody"></div>
+    </div>
+
+    <div class="lb-actions">
+      <a href="play.html" class="btn-primary" style="display:inline-block;text-decoration:none;margin-top:24px;">Play Now →</a>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <p>© 2026 ENIGMA Riddle Challenge Portal. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      renderLeaderboard();
+      renderPodium();
+    });
+
+    function renderPodium() {
+      const lb = JSON.parse(localStorage.getItem('enigma_lb') || '[]');
+      const area = document.getElementById('podiumArea');
+      if (lb.length < 1) { area.style.display = 'none'; return; }
+
+      const medals = ['🥇','🥈','🥉'];
+      const classes = ['first','second','third'];
+      const orders = [1,0,2]; // display 2nd, 1st, 3rd for podium shape
+
+      const top = lb.slice(0,3);
+      // Reorder for podium visual: put 1st in center
+      const reordered = [top[1], top[0], top[2]].filter(Boolean);
+      const classMap = top[1] ? ['second','first','third'] : ['first','second','third'];
+
+      area.innerHTML = reordered.map((e, i) => {
+        const origIdx = reordered === top ? i : (i === 1 ? 0 : i === 0 ? 1 : 2);
+        const cls = classMap[i] || '';
+        const medal = top[1] ? ['🥈','🥇','🥉'][i] : medals[i];
+        return `
+          <div class="podium-card ${cls}">
+            <div class="podium-medal">${medal}</div>
+            <div class="podium-name">${e.name}</div>
+            <div class="podium-score">${e.score}</div>
+            <div class="podium-label">points</div>
+          </div>`;
+      }).join('');
+    }
+  </script>
+</body>
+</html>
